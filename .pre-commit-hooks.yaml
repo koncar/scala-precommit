@@ -12,7 +12,7 @@
   language: python_venv
   stages: [commit,push]
   entry: sbt
-  args: ['"scalafix RemoveUnused"']
+  args: ['scalafix RemoveUnused']
   pass_filenames: false
   always_run: true
   minimum_pre_commit_version: '0.19.0'
