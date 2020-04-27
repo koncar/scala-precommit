@@ -1,0 +1,8 @@
+repos:
+  - repo: https://github.com/koncar/scala-precommit
+    rev: master
+    hooks:
+      - id: sbt-scalafmt
+        stages: [push]
+      - id: sbt-scalafix
+        stages: [push]

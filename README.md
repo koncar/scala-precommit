@@ -1,14 +1,32 @@
-[metadata]
-name = pre_commit_hooks
-version = 0.8.0
+# Scala pre-commit hooks
 
-[options]
-packages = find:
-install_requires =
-    colorama
-python_requires = >=3.6
+Pre commit/push hooks for formating and removing unused imports from scala project
 
-[options.entry_points]
-console_scripts =
-    sbt-scalafmt = pre_commit_hooks.scalafmt:main
-    sbt-scalafix = pre_commit_hooks.scalafix:main
+### Instalation
+First copy `.pre-commit-config.yaml` to your scala  project
+
+Then same from your scala project execute:
+```
+pip install pre-commit
+
+# and then one of following two commands
+# pre push hook
+pre-commit install --hook-type pre-push
+# pre commit hook
+pre-commit install
+```
+
+In `plugins.sbt` you should have plugins for `scalafmt` and `scalafix`
+```
+addSbtPlugin("org.scalameta"  % "sbt-scalafmt"  % "2.3.2")
+addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.13")
+``` 
+
+also add this to `build.sbt`
+```
+addCompilerPlugin(scalafixSemanticdb)
+scalacOptions ++= List(
+  "-Yrangepos",
+  "-Ywarn-unused-import"
+)
+```
